@@ -1,6 +1,6 @@
 <img align="right" width="50%" src="img/george.jpg">
 
-### Hi! :wave: 
+### Hi! 👋
 I'm George. I like to write code. Sometimes I play bass too.
 
 I'm a professional software developer. Outside of work, my main focus right now is [reading a lot of textbooks](https://teachyourselfcs.com/). 
