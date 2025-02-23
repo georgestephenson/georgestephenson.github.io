@@ -1,5 +1,3 @@
-# [George Stephenson](https://georgestephenson.github.io)
-
 <img align="right" width="50%" src="img/george.jpg">
 
 ### Hi! :wave: 
