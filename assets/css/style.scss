@@ -1,0 +1,222 @@
+---
+# Empty front matter tells Jekyll to run this through Sass (compiles to style.css).
+# This file overrides jekyll-theme-primer's assets/css/style.scss, so there is only
+# one source for _site/assets/css/style.css (no more build race).
+---
+:root {
+  --bg: #ffffff;
+  --fg: #1a1a1a;
+  --muted: #666;
+  --accent: #2563eb;
+  --border: #e5e5e5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14171a;
+    --fg: #e8e8e8;
+    --muted: #9aa0a6;
+    --accent: #6ea8fe;
+    --border: #2a2f34;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--fg);
+  background: var(--bg);
+}
+
+a { color: var(--accent); }
+
+/* ---- Navbar ---- */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.site-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+  color: var(--fg);
+}
+
+.site-nav a {
+  margin-left: 1.25rem;
+  text-decoration: none;
+  color: var(--muted);
+}
+
+.site-nav a:hover { color: var(--accent); }
+
+/* ---- Content ---- */
+.content {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.portrait {
+  float: right;
+  width: 42%;
+  max-width: 220px;
+  border-radius: 8px;
+  margin: 0 0 1rem 1.5rem;
+}
+
+/* ---- Blog ---- */
+.post-list {
+  list-style: none;
+  padding: 0;
+}
+
+.post-list li {
+  margin-bottom: 1.5rem;
+}
+
+.post-list-date {
+  display: block;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.post-list li a {
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.post-list-excerpt {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+}
+
+.post-meta {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-top: -0.5rem;
+}
+
+.post-tag {
+  margin-right: 0.4rem;
+}
+
+.post-back {
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+/* ---- Sidenotes / footnotes ---- */
+.sidenote-ref {
+  vertical-align: super;
+  font-size: 0.7em;
+  font-style: italic;
+  color: var(--accent);
+  cursor: pointer;
+  padding: 0 0.15em;
+  user-select: none;
+}
+
+.sidenote-toggle {
+  display: none;
+}
+
+/* Mobile-first: collapsed, revealed by tapping the reference. */
+.sidenote {
+  display: none;
+  margin: 0.75rem 0;
+  padding: 0.6rem 0.9rem;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 4px 4px 0;
+  background: rgba(37, 99, 235, 0.06);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--fg);
+}
+
+.sidenote-toggle:checked + .sidenote {
+  display: block;
+}
+
+.sidenote-num {
+  font-style: italic;
+  font-weight: 600;
+  color: var(--accent);
+  margin-right: 0.35rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .sidenote { background: rgba(110, 168, 254, 0.10); }
+}
+
+/* Wide screens: float the note into the right margin, always visible. */
+@media (min-width: 1280px) {
+  .sidenote {
+    display: block;
+    float: right;
+    clear: right;
+    width: 220px;
+    margin: 0.3rem -260px 1.2rem 0;
+    padding: 0;
+    border-left: none;
+    border-radius: 0;
+    background: none;
+    font-size: 0.82rem;
+    line-height: 1.45;
+    color: var(--muted);
+  }
+}
+
+/* ---- Footer ---- */
+.site-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.social-links a {
+  display: inline-flex;
+  color: var(--muted);
+  transition: color 0.15s ease;
+}
+
+.social-links a:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 480px) {
+  .site-header { flex-direction: column; align-items: flex-start; }
+  .site-nav a { margin: 0 1rem 0 0; }
+  .portrait { float: none; width: 60%; margin: 0 auto 1rem; display: block; }
+}

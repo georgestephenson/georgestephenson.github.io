@@ -1,0 +1,13 @@
+title: George Stephenson
+description: Software developer. Self-study, code, and the occasional bass line.
+author: George Stephenson
+
+# Pretty URLs: projects.md -> /projects/ instead of /projects.html
+permalink: pretty
+
+# Files/folders Jekyll should not copy into the built site
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
