@@ -12,7 +12,7 @@ lang: en
 url: "https://georgestephenson.github.io"
 
 # Default image for link previews (Open Graph / Twitter cards).
-image: /img/george.jpg
+image: /img/george.webp
 
 # Surfaced by jekyll-seo-tag as JSON-LD sameAs links.
 social:
@@ -24,14 +24,25 @@ social:
 # Pretty URLs: projects.md -> /projects/ instead of /projects.html
 permalink: pretty
 
+# Minify the compiled CSS (strips comments/whitespace, ~30-40% smaller).
+sass:
+  style: compressed
+
 plugins:
   - jekyll-seo-tag   # <title>, meta description, Open Graph, Twitter cards, JSON-LD
   - jekyll-feed      # /feed.xml RSS for the blog
   - jekyll-sitemap   # /sitemap.xml for search engines
 
-# Files/folders Jekyll should not copy into the built site
+# Files/folders Jekyll should not copy into the built site.
+# NOTE: setting `exclude` replaces Jekyll's defaults, so node_modules etc. must
+# be listed explicitly or the JS test tooling ends up in _site and the sitemap.
 exclude:
   - README.md
   - Gemfile
   - Gemfile.lock
   - vendor
+  - node_modules
+  - package.json
+  - package-lock.json
+  - unlighthouse.config.ts
+  - _config_test.yml

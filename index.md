@@ -3,12 +3,19 @@ layout: default
 # No title here so jekyll-seo-tag uses "George Stephenson | Tech Lead"
 # (site title + tagline) for the landing page.
 description: George Stephenson — Tech Lead in London. I build enterprise systems and grow the teams behind them.
+# Explicit page-level image so jekyll-seo-tag emits og:image / twitter:image reliably.
+image: /img/george.webp
 ---
 
 <section class="hero">
-  <img class="hero-portrait" width="300" height="300" decoding="async" src="{{ '/img/george.webp' | relative_url }}" alt="George Stephenson">
+  <img class="hero-portrait" width="300" height="300" fetchpriority="high" decoding="async" src="{{ '/img/george.webp' | relative_url }}" alt="George Stephenson">
   <div class="hero-body">
-    <p class="hero-eyebrow">Tech Lead · London, UK</p>
+    <p class="hero-eyebrow">
+      <span class="eyebrow-item">
+        <svg class="eyebrow-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"></rect><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>Tech Lead</span>
+      <span class="eyebrow-item">
+        <svg class="eyebrow-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>London, UK</span>
+    </p>
     <h1 class="hero-title">I build enterprise systems — and grow the teams behind them.</h1>
     <p class="hero-lede">
       9 years delivering mission-critical software for Fortune&nbsp;500 clients and
@@ -50,7 +57,7 @@ description: George Stephenson — Tech Lead in London. I build enterprise syste
   <li>
     <span class="timeline-when">2026 –</span>
     <span class="timeline-node" aria-hidden="true"></span>
-    <img class="timeline-logo" loading="lazy" decoding="async" src="{{ '/img/engage.webp' | relative_url }}" alt="Engage Partners UK logo">
+    <img class="timeline-logo" width="52" height="52" loading="lazy" decoding="async" src="{{ '/img/engage.webp' | relative_url }}" alt="Engage Partners UK logo">
     <div class="timeline-main">
       <span class="timeline-role">Lead Software Developer</span>
       <span class="timeline-org">Engage Education · London</span>
@@ -64,7 +71,7 @@ description: George Stephenson — Tech Lead in London. I build enterprise syste
   <li>
     <span class="timeline-when">2022 – 2026</span>
     <span class="timeline-node" aria-hidden="true"></span>
-    <img class="timeline-logo" loading="lazy" decoding="async" src="{{ '/img/pdms.webp' | relative_url }}" alt="PDMS logo">
+    <img class="timeline-logo" width="52" height="52" loading="lazy" decoding="async" src="{{ '/img/pdms.webp' | relative_url }}" alt="PDMS logo">
     <div class="timeline-main">
       <span class="timeline-role">Lead Software Developer &amp; Team Lead</span>
       <span class="timeline-org">PDMS · Isle of Man</span>
@@ -79,7 +86,7 @@ description: George Stephenson — Tech Lead in London. I build enterprise syste
   <li>
     <span class="timeline-when">2020 – 2022</span>
     <span class="timeline-node" aria-hidden="true"></span>
-    <img class="timeline-logo" loading="lazy" decoding="async" src="{{ '/img/pdms.webp' | relative_url }}" alt="PDMS logo">
+    <img class="timeline-logo" width="52" height="52" loading="lazy" decoding="async" src="{{ '/img/pdms.webp' | relative_url }}" alt="PDMS logo">
     <div class="timeline-main">
       <span class="timeline-role">Software Developer</span>
       <span class="timeline-org">PDMS · Isle of Man</span>
@@ -92,7 +99,7 @@ description: George Stephenson — Tech Lead in London. I build enterprise syste
   <li>
     <span class="timeline-when">2019</span>
     <span class="timeline-node" aria-hidden="true"></span>
-    <img class="timeline-logo" loading="lazy" decoding="async" src="{{ '/img/abacus.webp' | relative_url }}" alt="Abacus logo">
+    <img class="timeline-logo" width="52" height="52" loading="lazy" decoding="async" src="{{ '/img/abacus.webp' | relative_url }}" alt="Abacus logo">
     <div class="timeline-main">
       <span class="timeline-role">Software Developer</span>
       <span class="timeline-org">Abacus · Isle of Man</span>
@@ -104,7 +111,7 @@ description: George Stephenson — Tech Lead in London. I build enterprise syste
   <li>
     <span class="timeline-when">2016 – 2019</span>
     <span class="timeline-node" aria-hidden="true"></span>
-    <img class="timeline-logo" loading="lazy" decoding="async" src="{{ '/img/capula.webp' | relative_url }}" alt="Capula logo">
+    <img class="timeline-logo" width="52" height="52" loading="lazy" decoding="async" src="{{ '/img/capula.webp' | relative_url }}" alt="Capula logo">
     <div class="timeline-main">
       <span class="timeline-role">Graduate Software Engineer</span>
       <span class="timeline-org">Capula · Cumbria</span>
@@ -116,7 +123,7 @@ description: George Stephenson — Tech Lead in London. I build enterprise syste
   <li>
     <span class="timeline-when">2016 – 2017</span>
     <span class="timeline-node" aria-hidden="true"></span>
-    <img class="timeline-logo" loading="lazy" decoding="async" src="{{ '/img/cumbria.png' | relative_url }}" alt="University of Cumbria logo">
+    <img class="timeline-logo" width="52" height="52" loading="lazy" decoding="async" src="{{ '/img/cumbria.png' | relative_url }}" alt="University of Cumbria logo">
     <div class="timeline-main">
       <span class="timeline-role">BSc (Hons) Computing and IT</span>
       <span class="timeline-org">University of Cumbria</span>
@@ -125,7 +132,7 @@ description: George Stephenson — Tech Lead in London. I build enterprise syste
   <li>
     <span class="timeline-when">2011 – 2013</span>
     <span class="timeline-node" aria-hidden="true"></span>
-    <img class="timeline-logo" loading="lazy" decoding="async" src="{{ '/img/york.png' | relative_url }}" alt="University of York logo">
+    <img class="timeline-logo" width="52" height="52" loading="lazy" decoding="async" src="{{ '/img/york.png' | relative_url }}" alt="University of York logo">
     <div class="timeline-main">
       <span class="timeline-role">DipHE Computer Science</span>
       <span class="timeline-org">University of York</span>

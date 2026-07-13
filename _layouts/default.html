@@ -44,18 +44,18 @@
     <nav class="site-nav">
       <a href="{{ '/blog/' | relative_url }}">Blog</a>
       <span class="social-links">
-        <a href="https://github.com/georgestephenson" target="_blank" rel="me noopener" aria-label="GitHub">
+        <a href="https://github.com/georgestephenson" target="_blank" rel="me noopener" aria-label="GitHub (opens in new tab)">
           <svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor" aria-hidden="true">
             <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/>
           </svg>
         </a>
-        <a href="https://www.linkedin.com/in/geoste/" target="_blank" rel="me noopener" aria-label="LinkedIn">
+        <a href="https://www.linkedin.com/in/geoste/" target="_blank" rel="me noopener" aria-label="LinkedIn (opens in new tab)">
           <svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor" aria-hidden="true">
             <path d="M0 1.15C0 .52.52 0 1.16 0h13.68C15.48 0 16 .52 16 1.15v13.7c0 .63-.52 1.15-1.16 1.15H1.16C.52 16 0 15.48 0 14.85V1.15zm4.94 12.9V6.17H2.4v7.88h2.54zM3.67 5.12c.88 0 1.43-.59 1.43-1.32-.02-.75-.55-1.32-1.42-1.32-.87 0-1.44.57-1.44 1.32 0 .73.55 1.32 1.41 1.32h.02zM8.34 14.05V9.65c0-.23.02-.46.09-.62.18-.46.6-.93 1.31-.93.93 0 1.3.71 1.3 1.74v4.21h2.54V9.55c0-2.35-1.25-3.44-2.92-3.44-1.36 0-1.96.75-2.3 1.27v.03h-.02l.02-.03V6.17H5.81c.03.72 0 7.88 0 7.88h2.53z"/>
           </svg>
         </a>
       </span>
-      <button type="button" class="theme-toggle" aria-label="Toggle colour theme" title="Toggle theme">
+      <button type="button" class="theme-toggle" aria-label="Toggle colour theme" aria-pressed="false" title="Toggle theme">
         <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
           <circle cx="12" cy="12" r="4"></circle>
           <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
@@ -75,15 +75,19 @@
     (function () {
       var btn = document.querySelector('.theme-toggle');
       if (!btn) return;
+      var root = document.documentElement;
+
+      // Reflect the current (possibly OS-inferred) theme as the button's pressed state.
+      function effectiveTheme() {
+        return root.getAttribute('data-theme') ||
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      }
+      btn.setAttribute('aria-pressed', String(effectiveTheme() === 'dark'));
+
       btn.addEventListener('click', function () {
-        var root = document.documentElement;
-        var current = root.getAttribute('data-theme');
-        // If unset, infer from the OS preference so the first click flips visibly.
-        if (!current) {
-          current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        }
-        var next = current === 'dark' ? 'light' : 'dark';
+        var next = effectiveTheme() === 'dark' ? 'light' : 'dark';
         root.setAttribute('data-theme', next);
+        btn.setAttribute('aria-pressed', String(next === 'dark'));
         try { localStorage.setItem('theme', next); } catch (e) {}
       });
     })();

@@ -4,6 +4,9 @@ title: Blog
 description: Notes on what I'm learning and building.
 ---
 
+<h1 class="page-title">{{ page.title }}</h1>
+<p class="page-lede">{{ page.description }}</p>
+
 <ul class="post-list">
   {% for post in site.posts %}
     <li>

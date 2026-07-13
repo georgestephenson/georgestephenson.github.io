@@ -1,0 +1,6 @@
+# Gate-only overlay (layered on top of _config.yml for the quality gate build).
+# Pins the site URL to the localhost host we serve during testing, so canonical /
+# OpenGraph / sitemap URLs are self-consistent and deterministic — independent of
+# the github-pages gem's (flaky, network-dependent) production-URL inference.
+url: "http://localhost:4000"
+baseurl: ""
