@@ -4,10 +4,6 @@ title: Blog
 description: Notes on what I'm learning and building.
 ---
 
-## Blog
-
-Notes on what I'm learning and building.
-
 <ul class="post-list">
   {% for post in site.posts %}
     <li>

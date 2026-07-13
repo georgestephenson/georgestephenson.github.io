@@ -1,9 +1,33 @@
 title: George Stephenson
-description: Software developer. Self-study, code, and the occasional bass line.
-author: George Stephenson
+tagline: Tech Lead
+description: >-
+  George Stephenson — Tech Lead in London. 9 years building enterprise
+  systems and leading the teams behind them.
+author:
+  name: George Stephenson
+  # Used by jekyll-seo-tag for Twitter card attribution (leave blank if none).
+  twitter:
+lang: en
+# Set this to your live URL so jekyll-seo-tag can build absolute Open Graph URLs.
+url: "https://georgestephenson.github.io"
+
+# Default image for link previews (Open Graph / Twitter cards).
+image: /img/george.jpg
+
+# Surfaced by jekyll-seo-tag as JSON-LD sameAs links.
+social:
+  name: George Stephenson
+  links:
+    - https://github.com/georgestephenson
+    - https://www.linkedin.com/in/geoste/
 
 # Pretty URLs: projects.md -> /projects/ instead of /projects.html
 permalink: pretty
+
+plugins:
+  - jekyll-seo-tag   # <title>, meta description, Open Graph, Twitter cards, JSON-LD
+  - jekyll-feed      # /feed.xml RSS for the blog
+  - jekyll-sitemap   # /sitemap.xml for search engines
 
 # Files/folders Jekyll should not copy into the built site
 exclude:
