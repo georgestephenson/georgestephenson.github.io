@@ -1,4 +1,4 @@
-<img align="right" width="50%" src="img/george.jpg">
+<img align="right" width="50%" src="img/george.webp">
 
 ### Hi! 👋
 I'm George. I like to write code. Sometimes I play bass too.
