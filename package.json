@@ -5,7 +5,7 @@
   "description": "Quality gate (HTML validity, links, accessibility, performance/SEO) for the Jekyll site.",
   "scripts": {
     "build": "bundle exec jekyll build --config _config.yml,_config_test.yml",
-    "serve": "ruby -run -e httpd ./_site -p 4000 2>/dev/null",
+    "serve": "bundle exec ruby -run -e httpd ./_site -p 4000",
     "lint:css": "stylelint \"assets/css/**/*.scss\"",
     "test:html": "java -jar \"$(node -e \"process.stdout.write(require('vnu-jar'))\")\" --skip-non-html --filterpattern \"Trailing slash on void elements.*\" ./_site",
     "test:proof": "bundle exec htmlproofer ./_site --disable-external --no-enforce-https --checks Links,Images,Scripts,Favicon,OpenGraph",
