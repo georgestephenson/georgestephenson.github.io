@@ -518,6 +518,14 @@ a { color: var(--accent); }
   overflow: hidden;
 }
 
+/* When collapsed the region is clipped to zero height and marked inert, so its
+   content is invisible and non-interactive. Hide it from the render tree too:
+   without this the clipped text is still evaluated by accessibility scanners,
+   which can't resolve its background through the collapse and report false
+   colour-contrast failures. Revealing (removing .collapsed) restores it before
+   the height animation runs, so the content is visible as the region grows. */
+.collapsible.collapsed .collapsible-inner { visibility: hidden; }
+
 /* Trim the certs' own bottom margin here; the toggle button owns the spacing. */
 .collapsible-inner .certs { margin: 1.5rem 0 0; }
 
