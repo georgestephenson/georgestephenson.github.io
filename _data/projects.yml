@@ -1,8 +1,5 @@
 # Single source for the /projects/ page and the home-page "Projects" summary.
 # `repo` is owner/name — the "View on GitHub" link is built from it.
-# `badges[]` are full shields.io URLs. We use STATIC badges (img.shields.io/badge/…)
-# rather than the live github/<stat> endpoints: those call the GitHub API on every
-# request and shields rate-limits them, so they fail intermittently for everyone.
 
 - name: Best Books Guide
   tagline: React 19 · Fastify · PostgreSQL · AWS · Terraform
@@ -16,13 +13,6 @@
     a Fastify API on Node, PostgreSQL and Redis, all provisioned on AWS with
     Terraform and Ansible and shipped through GitHub Actions with zero-downtime
     deploys from <code>main</code>.
-  badges:
-    - src: 'https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white'
-      alt: 'Built with TypeScript'
-    - src: 'https://img.shields.io/badge/AWS-232F3E?style=flat&logo=amazonwebservices&logoColor=white'
-      alt: 'Deployed on AWS'
-    - src: 'https://img.shields.io/badge/license-MIT-2563eb?style=flat'
-      alt: 'License: MIT'
 
 - name: Zomb Boy
   tagline: Game Boy Color · Z80 assembly
@@ -36,10 +26,3 @@
     dynamic conversations shift relationships and outcomes. It runs in the
     browser via an emulator on GitHub Pages, with turn-based combat and a save
     system on the roadmap.
-  badges:
-    - src: 'https://img.shields.io/badge/Z80%20Assembly-6E4C13?style=flat'
-      alt: 'Written in Z80 assembly'
-    - src: 'https://img.shields.io/badge/Game%20Boy%20Color-8B956D?style=flat'
-      alt: 'Platform: Game Boy Color'
-    - src: 'https://img.shields.io/badge/GitHub%20Pages-121013?style=flat&logo=github&logoColor=white'
-      alt: 'Playable on GitHub Pages'
