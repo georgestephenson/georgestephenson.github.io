@@ -30,30 +30,10 @@ image: /img/george.webp
   </div>
 </section>
 
-<ul class="certs" aria-label="Certifications">
-  <li>
-    <a href="https://aws.amazon.com/certification/certified-solutions-architect-associate/" target="_blank" rel="noopener" title="AWS Certified Solutions Architect – Associate">
-      <img loading="lazy" decoding="async" width="208" height="208" src="{{ '/img/solutions-architect-associate.webp' | relative_url }}" alt="AWS Certified Solutions Architect – Associate">
-    </a>
-  </li>
-  <li>
-    <a href="https://learn.microsoft.com/en-us/credentials/certifications/azure-developer/" target="_blank" rel="noopener" title="Microsoft Certified: Azure Developer Associate">
-      <img loading="lazy" decoding="async" width="208" height="208" src="{{ '/img/azure-developer-associate.webp' | relative_url }}" alt="Microsoft Certified: Azure Developer Associate">
-    </a>
-  </li>
-  <li>
-    <a href="https://learn.microsoft.com/en-us/credentials/certifications/power-bi-data-analyst-associate/" target="_blank" rel="noopener" title="Microsoft Certified: Power BI Data Analyst Associate">
-      <img loading="lazy" decoding="async" width="208" height="208" src="{{ '/img/power-bi-data-analyst.webp' | relative_url }}" alt="Microsoft Certified: Power BI Data Analyst Associate">
-    </a>
-  </li>
-  <li>
-    <a href="https://www.hashicorp.com/certification/terraform-associate" target="_blank" rel="noopener" title="HashiCorp Certified: Terraform Associate (004)">
-      <img loading="lazy" decoding="async" width="208" height="208" src="{{ '/img/terraform-associate.webp' | relative_url }}" alt="HashiCorp Certified: Terraform Associate (004)">
-    </a>
-  </li>
-</ul>
-
-<ol class="timeline">
+{% comment %} The current role is always shown; the rest of the timeline and the
+certifications live in the collapsible region below, revealed by the button.
+Everything renders expanded without JS — the toggle script collapses it on load. {% endcomment %}
+<ol class="timeline timeline-lead">
   <li>
     <span class="timeline-when">2026 –</span>
     <span class="timeline-node" aria-hidden="true"></span>
@@ -68,79 +48,132 @@ image: /img/george.webp
       workflows with Claude Code.</p>
     </div>
   </li>
-  <li>
-    <span class="timeline-when">2022 – 2026</span>
-    <span class="timeline-node" aria-hidden="true"></span>
-    <img class="timeline-logo" width="52" height="52" loading="lazy" decoding="async" src="{{ '/img/pdms.webp' | relative_url }}" alt="PDMS logo">
-    <div class="timeline-main">
-      <span class="timeline-role">Lead Software Developer &amp; Team Lead</span>
-      <span class="timeline-org">PDMS · Isle of Man</span>
-      <p>Lead engineer for GSIS — a global BOM system handling 100,000+ product revisions
-      and 500,000+ parts across 30+ brands — and for major enhancements to BORIS, a
-      vessel and crew management system for one of the world's largest ship registries.
-      Managed a hybrid team of 6 while staying hands-on, refactored a legacy ASP.NET
-      codebase (DI with Autofac, XUnit) for measurable gains in code health and delivery
-      speed, delivered 10+ SAP ERP interfaces, and ran Power BI consultancy workshops.</p>
-    </div>
-  </li>
-  <li>
-    <span class="timeline-when">2020 – 2022</span>
-    <span class="timeline-node" aria-hidden="true"></span>
-    <img class="timeline-logo" width="52" height="52" loading="lazy" decoding="async" src="{{ '/img/pdms.webp' | relative_url }}" alt="PDMS logo">
-    <div class="timeline-main">
-      <span class="timeline-role">Software Developer</span>
-      <span class="timeline-org">PDMS · Isle of Man</span>
-      <p>Built scalable C# .NET Core applications (SQL Server, Angular) for clients
-      including Stanley Black &amp; Decker and the Bahamas Maritime Authority. Led the
-      BORIS back-office system and Angular public portal for a registry with 50M+ gross
-      tonnage, and spearheaded REST/SAP ERP integration through clean abstraction layers.</p>
-    </div>
-  </li>
-  <li>
-    <span class="timeline-when">2019</span>
-    <span class="timeline-node" aria-hidden="true"></span>
-    <img class="timeline-logo" width="52" height="52" loading="lazy" decoding="async" src="{{ '/img/abacus.webp' | relative_url }}" alt="Abacus logo">
-    <div class="timeline-main">
-      <span class="timeline-role">Software Developer</span>
-      <span class="timeline-org">Abacus · Isle of Man</span>
-      <p>Developed and maintained a bespoke C# .NET and SQL Server financial client
-      administration system, building web services to integrate third-party systems and
-      supporting roll-outs to three newly acquired international offices under tight deadlines.</p>
-    </div>
-  </li>
-  <li>
-    <span class="timeline-when">2016 – 2019</span>
-    <span class="timeline-node" aria-hidden="true"></span>
-    <img class="timeline-logo" width="52" height="52" loading="lazy" decoding="async" src="{{ '/img/capula.webp' | relative_url }}" alt="Capula logo">
-    <div class="timeline-main">
-      <span class="timeline-role">Graduate Software Engineer</span>
-      <span class="timeline-org">Capula · Cumbria</span>
-      <p>Engineered ASP.NET applications for the nuclear industry (C# .NET, VB.NET, T-SQL,
-      Oracle PL/SQL) under strict security and regulatory standards. Delivered a SCADA
-      reporting solution end to end, and automated IT operations with PowerShell.</p>
-    </div>
-  </li>
-  <li>
-    <span class="timeline-when">2016 – 2017</span>
-    <span class="timeline-node" aria-hidden="true"></span>
-    <img class="timeline-logo" width="52" height="52" loading="lazy" decoding="async" src="{{ '/img/cumbria.png' | relative_url }}" alt="University of Cumbria logo">
-    <div class="timeline-main">
-      <span class="timeline-role">BSc (Hons) Computing and IT</span>
-      <span class="timeline-org">University of Cumbria</span>
-    </div>
-  </li>
-  <li>
-    <span class="timeline-when">2011 – 2013</span>
-    <span class="timeline-node" aria-hidden="true"></span>
-    <img class="timeline-logo" width="52" height="52" loading="lazy" decoding="async" src="{{ '/img/york.png' | relative_url }}" alt="University of York logo">
-    <div class="timeline-main">
-      <span class="timeline-role">DipHE Computer Science</span>
-      <span class="timeline-org">University of York</span>
-    </div>
-  </li>
 </ol>
 
-## Latest writing
+<div class="collapsible" id="more-experience">
+  <div class="collapsible-inner">
+    <ol class="timeline">
+      <li>
+        <span class="timeline-when">2022 – 2026</span>
+        <span class="timeline-node" aria-hidden="true"></span>
+        <img class="timeline-logo" width="52" height="52" loading="lazy" decoding="async" src="{{ '/img/pdms.webp' | relative_url }}" alt="PDMS logo">
+        <div class="timeline-main">
+          <span class="timeline-role">Lead Software Developer &amp; Team Lead</span>
+          <span class="timeline-org">PDMS · Isle of Man</span>
+          <p>Lead engineer for GSIS — a global BOM system handling 100,000+ product revisions
+          and 500,000+ parts across 30+ brands — and for major enhancements to BORIS, a
+          vessel and crew management system for one of the world's largest ship registries.
+          Managed a hybrid team of 6 while staying hands-on, refactored a legacy ASP.NET
+          codebase (DI with Autofac, XUnit) for measurable gains in code health and delivery
+          speed, delivered 10+ SAP ERP interfaces, and ran Power BI consultancy workshops.</p>
+        </div>
+      </li>
+      <li>
+        <span class="timeline-when">2020 – 2022</span>
+        <span class="timeline-node" aria-hidden="true"></span>
+        <img class="timeline-logo" width="52" height="52" loading="lazy" decoding="async" src="{{ '/img/pdms.webp' | relative_url }}" alt="PDMS logo">
+        <div class="timeline-main">
+          <span class="timeline-role">Software Developer</span>
+          <span class="timeline-org">PDMS · Isle of Man</span>
+          <p>Built scalable C# .NET Core applications (SQL Server, Angular) for clients
+          including Stanley Black &amp; Decker and the Bahamas Maritime Authority. Led the
+          BORIS back-office system and Angular public portal for a registry with 50M+ gross
+          tonnage, and spearheaded REST/SAP ERP integration through clean abstraction layers.</p>
+        </div>
+      </li>
+      <li>
+        <span class="timeline-when">2019</span>
+        <span class="timeline-node" aria-hidden="true"></span>
+        <img class="timeline-logo" width="52" height="52" loading="lazy" decoding="async" src="{{ '/img/abacus.webp' | relative_url }}" alt="Abacus logo">
+        <div class="timeline-main">
+          <span class="timeline-role">Software Developer</span>
+          <span class="timeline-org">Abacus · Isle of Man</span>
+          <p>Developed and maintained a bespoke C# .NET and SQL Server financial client
+          administration system, building web services to integrate third-party systems and
+          supporting roll-outs to three newly acquired international offices under tight deadlines.</p>
+        </div>
+      </li>
+      <li>
+        <span class="timeline-when">2016 – 2019</span>
+        <span class="timeline-node" aria-hidden="true"></span>
+        <img class="timeline-logo" width="52" height="52" loading="lazy" decoding="async" src="{{ '/img/capula.webp' | relative_url }}" alt="Capula logo">
+        <div class="timeline-main">
+          <span class="timeline-role">Graduate Software Engineer</span>
+          <span class="timeline-org">Capula · Cumbria</span>
+          <p>Engineered ASP.NET applications for the nuclear industry (C# .NET, VB.NET, T-SQL,
+          Oracle PL/SQL) under strict security and regulatory standards. Delivered a SCADA
+          reporting solution end to end, and automated IT operations with PowerShell.</p>
+        </div>
+      </li>
+      <li>
+        <span class="timeline-when">2016 – 2017</span>
+        <span class="timeline-node" aria-hidden="true"></span>
+        <img class="timeline-logo" width="52" height="52" loading="lazy" decoding="async" src="{{ '/img/cumbria.png' | relative_url }}" alt="University of Cumbria logo">
+        <div class="timeline-main">
+          <span class="timeline-role">BSc (Hons) Computing and IT</span>
+          <span class="timeline-org">University of Cumbria</span>
+        </div>
+      </li>
+      <li>
+        <span class="timeline-when">2011 – 2013</span>
+        <span class="timeline-node" aria-hidden="true"></span>
+        <img class="timeline-logo" width="52" height="52" loading="lazy" decoding="async" src="{{ '/img/york.png' | relative_url }}" alt="University of York logo">
+        <div class="timeline-main">
+          <span class="timeline-role">DipHE Computer Science</span>
+          <span class="timeline-org">University of York</span>
+        </div>
+      </li>
+    </ol>
+
+    <ul class="certs" aria-label="Certifications">
+      <li>
+        <a href="https://aws.amazon.com/certification/certified-solutions-architect-associate/" target="_blank" rel="noopener" title="AWS Certified Solutions Architect – Associate">
+          <img loading="lazy" decoding="async" width="208" height="208" src="{{ '/img/solutions-architect-associate.webp' | relative_url }}" alt="AWS Certified Solutions Architect – Associate">
+        </a>
+      </li>
+      <li>
+        <a href="https://learn.microsoft.com/en-us/credentials/certifications/azure-developer/" target="_blank" rel="noopener" title="Microsoft Certified: Azure Developer Associate">
+          <img loading="lazy" decoding="async" width="208" height="208" src="{{ '/img/azure-developer-associate.webp' | relative_url }}" alt="Microsoft Certified: Azure Developer Associate">
+        </a>
+      </li>
+      <li>
+        <a href="https://learn.microsoft.com/en-us/credentials/certifications/power-bi-data-analyst-associate/" target="_blank" rel="noopener" title="Microsoft Certified: Power BI Data Analyst Associate">
+          <img loading="lazy" decoding="async" width="208" height="208" src="{{ '/img/power-bi-data-analyst.webp' | relative_url }}" alt="Microsoft Certified: Power BI Data Analyst Associate">
+        </a>
+      </li>
+      <li>
+        <a href="https://www.hashicorp.com/certification/terraform-associate" target="_blank" rel="noopener" title="HashiCorp Certified: Terraform Associate (004)">
+          <img loading="lazy" decoding="async" width="208" height="208" src="{{ '/img/terraform-associate.webp' | relative_url }}" alt="HashiCorp Certified: Terraform Associate (004)">
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="expand-toggle-wrap" hidden>
+  <span class="expand-toggle-when" aria-hidden="true">Previous</span>
+  <span class="expand-toggle-node" aria-hidden="true"></span>
+  <button type="button" class="expand-toggle" aria-expanded="false" aria-controls="more-experience">
+    <span class="expand-toggle-text">Show full experience</span>
+    <svg class="expand-toggle-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+  </button>
+</div>
+
+## Projects
+
+<ul class="post-list">
+  {% for project in site.data.projects %}
+    <li>
+      <a href="{{ project.url }}" target="_blank" rel="noopener">{{ project.name }}</a>
+      <span class="post-list-date">{{ project.tagline }}</span>
+      <p class="post-list-excerpt">{{ project.summary }}</p>
+    </li>
+  {% endfor %}
+</ul>
+
+<p><a href="{{ '/projects/' | relative_url }}">See all projects →</a></p>
+
+## Writing
 
 <ul class="post-list">
   {% for post in site.posts limit:2 %}
@@ -153,3 +186,30 @@ image: /img/george.webp
 </ul>
 
 <p><a href="{{ '/blog/' | relative_url }}">Read the blog →</a></p>
+
+<script>
+  (function () {
+    var toggle = document.querySelector('.expand-toggle');
+    var region = document.getElementById('more-experience');
+    if (!toggle || !region) return;
+    var wrap = toggle.closest('.expand-toggle-wrap');
+
+    // Progressive enhancement: the section renders expanded for no-JS visitors.
+    // Now that JS can reveal it on demand, collapse it and show the toggle.
+    // Collapse before the transition class is added so the first paint doesn't animate.
+    region.classList.add('collapsed');
+    region.setAttribute('inert', '');
+    region.setAttribute('tabindex', '-1');
+    if (wrap) wrap.hidden = false;
+    requestAnimationFrame(function () { region.classList.add('animate'); });
+
+    // Expanding is one-way: reveal the section and remove the toggle entirely.
+    toggle.addEventListener('click', function () {
+      toggle.setAttribute('aria-expanded', 'true');
+      region.classList.remove('collapsed');
+      region.removeAttribute('inert');
+      if (wrap) wrap.hidden = true;
+      region.focus({ preventScroll: true });
+    });
+  })();
+</script>

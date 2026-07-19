@@ -479,6 +479,205 @@ a { color: var(--accent); }
   .certs img { height: 88px; }
 }
 
+/* ---- Expandable experience / certifications ---- */
+
+/* Sit the lead role close under the hero, and butt it against the collapsible
+   list below so their rails join. */
+.timeline-lead { margin: 0.5rem 0 0; }
+
+/* The lead role is the only <li> in its list, so it matches both :first-child
+   and :last-child and their rail rules cancel out. Re-run the line from the dot
+   to the bottom — the selector matches the base last-child rule's specificity so
+   this later declaration wins. It flows into the expanded list (or points at the
+   toggle when collapsed). */
+.timeline-lead li:first-child .timeline-node::before { top: 0.7rem; bottom: 0; height: auto; }
+
+/* Restore the inter-item spacing the last-child rule strips, so the lead role
+   sits the same distance from the next entry as the rest of the timeline. */
+.timeline-lead li:last-child .timeline-main { padding-bottom: 1.75rem; }
+
+/* Continue the rail from the top of the first expanded item, closing the seam. */
+.collapsible-inner .timeline { margin-top: 0; }
+.collapsible-inner .timeline li:first-child .timeline-node::before { top: 0; }
+
+/* Animating grid-template-rows between 0fr and 1fr grows/shrinks the region to
+   its natural height without hard-coding it. Expanded by default so no-JS
+   visitors see everything; the toggle script collapses it on load. */
+.collapsible {
+  display: grid;
+  grid-template-rows: 1fr;
+}
+
+/* Transitions are enabled by JS one frame after the initial collapse, so the
+   first paint doesn't animate. */
+.collapsible.animate { transition: grid-template-rows 0.45s ease; }
+.collapsible.collapsed { grid-template-rows: 0fr; }
+
+.collapsible-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Trim the certs' own bottom margin here; the toggle button owns the spacing. */
+.collapsible-inner .certs { margin: 1.5rem 0 0; }
+
+/* The toggle is a mini timeline row that continues the rail: a "More" marker in
+   the year column, the node on the rail, and the button in the text column — so
+   it reads as the timeline's terminal entry. It sits directly under the current
+   role (margin-top 0) and is removed entirely once the section is revealed, so
+   there is no collapsed/expanded variant to style. */
+.expand-toggle-wrap {
+  display: grid;
+  grid-template-columns: 5rem 16px 52px 1fr;
+  column-gap: 0.9rem;
+  align-items: center;
+  margin: 0 0 2.5rem;
+}
+
+/* `display: grid` above overrides the UA [hidden] rule, so hiding the wrap (in
+   markup for no-JS, and on click once revealed) needs this explicit reset. */
+.expand-toggle-wrap[hidden] { display: none; }
+
+.expand-toggle-when {
+  grid-column: 1;
+  text-align: right;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.expand-toggle-node {
+  grid-column: 2;
+  position: relative;
+  align-self: stretch;
+}
+
+/* Line in from the top, capped by the dot centred on the button. */
+.expand-toggle-node::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  height: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: var(--border);
+}
+
+.expand-toggle-node::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--bg);
+}
+
+.expand-toggle {
+  grid-column: 4;
+  justify-self: start;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1.1rem;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.expand-toggle:hover { color: var(--accent); border-color: var(--accent); }
+
+/* Match the timeline's narrow-screen columns so the node stays on the rail. */
+@media (max-width: 560px) {
+  .expand-toggle-wrap {
+    grid-template-columns: 2.4rem 14px 40px 1fr;
+    column-gap: 0.6rem;
+  }
+
+  .expand-toggle-when { font-size: 0.72rem; }
+}
+
+/* ---- Projects ---- */
+.projects {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.project-card {
+  padding: 1.25rem 1.4rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--accent-soft);
+  transition: border-color 0.15s ease, transform 0.05s ease;
+}
+
+.project-card:hover { border-color: var(--accent); }
+
+.project-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.9rem;
+}
+
+.project-name {
+  margin: 0;
+  font-size: 1.3rem;
+  line-height: 1.2;
+}
+
+.project-name a { text-decoration: none; }
+.project-name a:hover { text-decoration: underline; }
+
+.project-stack {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.project-desc {
+  margin: 0.6rem 0 0;
+  color: var(--fg);
+}
+
+.project-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.9rem 0 0;
+}
+
+.project-badges img {
+  display: block;
+  height: 20px;
+  width: auto;
+}
+
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 1rem 0 0;
+}
+
+/* Slightly smaller action buttons than the hero's. */
+.project-actions .btn {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.9rem;
+}
+
 /* ---- Post prose ---- */
 .post h2 { font-size: 1.5rem; line-height: 1.25; margin: 2rem 0 0.75rem; }
 .post h3 { font-size: 1.2rem; line-height: 1.3; margin: 1.5rem 0 0.5rem; }
