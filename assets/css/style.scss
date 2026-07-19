@@ -652,19 +652,6 @@ a { color: var(--accent); }
   color: var(--fg);
 }
 
-.project-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin: 0.9rem 0 0;
-}
-
-.project-badges img {
-  display: block;
-  height: 20px;
-  width: auto;
-}
-
 .project-actions {
   display: flex;
   flex-wrap: wrap;

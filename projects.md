@@ -17,11 +17,6 @@ description: Things I've built outside of work — a full-stack web app and a Ga
       <span class="project-stack">{{ project.tagline }}</span>
     </div>
     <p class="project-desc">{{ project.description }}</p>
-    <p class="project-badges">
-      {% for badge in project.badges %}
-      <img loading="lazy" decoding="async" src="{{ badge.src }}" alt="{{ badge.alt }}">
-      {% endfor %}
-    </p>
     <p class="project-actions">
       <a class="btn btn-primary" href="{{ project.url }}" target="_blank" rel="noopener">{{ project.url_label }}&nbsp;↗</a>
       <a class="btn" href="https://github.com/{{ project.repo }}" target="_blank" rel="noopener">View on GitHub&nbsp;↗</a>
