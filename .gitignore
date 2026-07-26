@@ -8,3 +8,5 @@ vendor/
 # Test tooling. Keep package-lock.json tracked (pins the JS tool versions).
 node_modules/
 .unlighthouse/
+
+settings.local.json
