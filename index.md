@@ -25,7 +25,7 @@ image: /img/george.webp
     </p>
     <p class="hero-actions">
       <a class="btn btn-primary" href="{{ '/blog/' | relative_url }}">Read the blog</a>
-      <a class="btn" href="mailto:gf.s@hotmail.com">Get in touch</a>
+      <a class="btn" href="mailto:george@geosona.com">Get in touch</a>
     </p>
   </div>
 </section>
