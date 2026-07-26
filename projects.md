@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Projects
-description: Things I've built outside of work — a full-stack web app and a Game Boy game in assembly.
+description: Things I've built outside of work — a full-stack web app, a retro game ROM toolchain, and a Game Boy game in assembly.
 ---
 
 <h1 class="page-title">{{ page.title }}</h1>

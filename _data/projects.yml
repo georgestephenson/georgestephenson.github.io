@@ -14,6 +14,19 @@
     Terraform and Ansible and shipped through GitHub Actions with zero-downtime
     deploys from <code>main</code>.
 
+- name: demake
+  tagline: TypeScript · pnpm workspace · retro toolchains
+  url: https://georgestephenson.github.io/demake/
+  url_label: Open the app
+  repo: georgestephenson/demake
+  summary: A toolchain that turns modern assets and simple code into real 8/16-bit ROMs.
+  description: >-
+    Convert art, music and simple code into
+    hardware-compliant retro cartridges for every mainstream retro console
+    and handheld. My simple scripting language, Demotic,
+    compiles to playable ROMs, and your art and music converts to compatible outputs. Everything is verified against emulated hardware in
+    CI, so the output has pixel-perfect accuracy.
+
 - name: Zomb Boy
   tagline: Game Boy Color · Z80 assembly
   url: https://georgestephenson.github.io/zomb-boy/
