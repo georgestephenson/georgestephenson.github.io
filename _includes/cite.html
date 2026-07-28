@@ -1,0 +1,41 @@
+{%- comment -%}
+  Inline citation marker, e.g. the Feynman technique{% include cite.html id="gleick-genius" %}
+
+  Sources are declared once in the post's front matter:
+
+    references:
+      - id: gleick-genius
+        author: James Gleick
+        title: "Genius: The Life and Science of Richard Feynman"
+        publisher: Pantheon Books
+        year: 1992
+        url: https://example.com/
+        note: Optional gloss on what the source says.
+
+  The number is the source's position in that list, so list sources in the order
+  they are first cited. Citing the same source twice reuses its number — unlike
+  sidenotes, which are numbered per occurrence.
+
+  _layouts/post.html renders the matching list (via references.html) whenever a
+  post declares any; callers only ever write the marker.
+{%- endcomment -%}
+{%- assign ref_index = 0 -%}
+{%- for r in page.references -%}
+  {%- if r.id == include.id -%}{%- assign ref_index = forloop.index -%}{%- endif -%}
+{%- endfor -%}
+{%- if ref_index == 0 -%}
+<!-- cite.html: no reference with id "{{ include.id }}" in this page's front matter -->
+{%- else -%}
+  {%- comment -%}
+    The back-link in the reference list points at the first citation, so only
+    that one carries the id — repeat citations would otherwise duplicate it.
+  {%- endcomment -%}
+  {%- assign ref_seen_marker = include.id | prepend: "|" | append: "|" -%}
+  {%- assign ref_seen = cite_ids_seen | default: "" -%}
+  {%- unless ref_seen contains ref_seen_marker -%}
+    {%- assign cite_ids_seen = ref_seen | append: ref_seen_marker -%}
+    {%- assign ref_first = true -%}
+  {%- endunless -%}
+<a class="cite-ref" href="#ref-{{ include.id }}"{% if ref_first %} id="cite-{{ include.id }}"{% endif %} aria-label="Reference {{ ref_index }}">{{ ref_index }}</a>
+  {%- assign ref_first = false -%}
+{%- endif -%}

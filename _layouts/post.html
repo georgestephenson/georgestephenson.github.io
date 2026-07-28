@@ -15,8 +15,137 @@ layout: default
 
   {{ content }}
 
+  {% comment %} Renders nothing unless the post declares `references:` in its front matter. {% endcomment %}
+  {% include references.html %}
+
   <p class="post-back"><a href="{{ '/blog/' | relative_url }}">← Back to all posts</a></p>
 </article>
+
+<script>
+  (function () {
+    // Appendices are long reference material, so each "## Appendix …" section is
+    // collapsed and its heading turned into a toggle. Progressive enhancement:
+    // without JS the whole appendix renders as ordinary prose.
+    var article = document.querySelector('.post');
+    if (!article) return;
+
+    var headings = Array.prototype.filter.call(article.querySelectorAll('h2[id]'), function (h) {
+      return /^appendix/i.test(h.id);
+    });
+    if (!headings.length) return;
+
+    var sections = headings.map(function (heading) {
+      // The heading keeps its id — anchor links from the contents list still land
+      // on it — and the section body moves into a collapsible region after it.
+      var region = document.createElement('div');
+      region.className = 'collapsible collapsed';
+      region.id = heading.id + '-body';
+      var inner = document.createElement('div');
+      inner.className = 'collapsible-inner';
+      region.appendChild(inner);
+      heading.parentNode.insertBefore(region, heading.nextSibling);
+
+      // Everything up to the next h2 (or the post's back-link) belongs to it.
+      var node = region.nextSibling;
+      while (node && !(node.nodeType === 1 &&
+                       (node.tagName === 'H2' || node.classList.contains('post-back')))) {
+        var next = node.nextSibling;
+        inner.appendChild(node);
+        node = next;
+      }
+      region.setAttribute('inert', '');
+
+      var button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'appendix-toggle';
+      button.setAttribute('aria-expanded', 'false');
+      button.setAttribute('aria-controls', region.id);
+      button.innerHTML = '<svg class="appendix-chevron" viewBox="0 0 24 24" width="16" height="16" ' +
+        'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" ' +
+        'stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>';
+
+      var label = document.createElement('span');
+      while (heading.firstChild) label.appendChild(heading.firstChild);
+      button.appendChild(label);
+
+      // The button already announces its expanded state, so the visible hint is
+      // decorative for screen readers.
+      var hint = document.createElement('span');
+      hint.className = 'appendix-hint';
+      hint.setAttribute('aria-hidden', 'true');
+      hint.textContent = 'Show';
+      button.appendChild(hint);
+
+      heading.appendChild(button);
+      heading.classList.add('appendix-heading');
+
+      var section = { heading: heading, region: region, button: button, hint: hint };
+      button.addEventListener('click', function () {
+        setExpanded(section, button.getAttribute('aria-expanded') !== 'true');
+      });
+      return section;
+    });
+
+    // Collapsed at first paint; transitions are enabled a frame later so the
+    // initial state doesn't animate in.
+    requestAnimationFrame(function () {
+      sections.forEach(function (s) { s.region.classList.add('animate'); });
+    });
+
+    function setExpanded(section, expanded) {
+      section.button.setAttribute('aria-expanded', String(expanded));
+      section.region.classList.toggle('collapsed', !expanded);
+      if (expanded) section.region.removeAttribute('inert');
+      else section.region.setAttribute('inert', '');
+      section.hint.textContent = expanded ? 'Hide' : 'Show';
+    }
+
+    // Linking to an appendix — from the contents list, or an external deep link —
+    // opens it, otherwise the anchor would land on a heading with nothing under it.
+    function revealHash(hash) {
+      var id = hash ? decodeURIComponent(hash.replace(/^#/, '')) : '';
+      if (!id) return;
+      var target = document.getElementById(id);
+      if (!target) return;
+
+      var section = null;
+      sections.forEach(function (s) {
+        if (s.heading === target || s.region === target || s.region.contains(target)) section = s;
+      });
+      if (!section) return;
+
+      if (section.button.getAttribute('aria-expanded') !== 'true') setExpanded(section, true);
+
+      // Headings read best at the top; anything else — a citation marker a
+      // reference's back-link points at, say — is centred so its sentence shows.
+      var where = target === section.heading ? { block: 'start' } : { block: 'center' };
+
+      target.scrollIntoView(where);
+      // With the other appendices closed the page is short, so that first scroll
+      // can be clamped by the document's end. Repeat once the section has opened
+      // and the page is its full height again.
+      function settle() { target.scrollIntoView(where); }
+      section.region.addEventListener('transitionend', function once() {
+        section.region.removeEventListener('transitionend', once);
+        settle();
+      });
+      setTimeout(settle, 500);
+    }
+
+    document.addEventListener('click', function (e) {
+      var link = e.target.closest && e.target.closest('a[href]');
+      if (!link || !link.hash) return;
+      if (link.pathname !== location.pathname || link.host !== location.host) return;
+      // Runs before the browser follows the link, so the target is already
+      // expanded by the time it scrolls. Repeat clicks on the current hash fire
+      // no hashchange, which is why the scrolling lives here too.
+      revealHash(link.hash);
+    });
+
+    window.addEventListener('hashchange', function () { revealHash(location.hash); });
+    revealHash(location.hash);
+  })();
+</script>
 
 {% if page.mermaid %}
 <script type="module">
@@ -24,11 +153,15 @@ layout: default
   // kramdown renders ```mermaid fences as <pre><code class="language-mermaid">;
   // rewrite them into the <pre class="mermaid"> shape mermaid expects, and wrap
   // each in a <figure> with the fence's data-caption as a <figcaption> + label.
+  var blocks = [];
   document.querySelectorAll('code.language-mermaid').forEach(function (code) {
     var pre = code.parentElement;
     var caption = pre.getAttribute('data-caption');
     pre.classList.add('mermaid');
-    pre.textContent = code.textContent;
+    // Keep the fence's text: rendering replaces the element's content with an
+    // <svg>, and re-rendering after a theme change needs the source back.
+    var source = code.textContent;
+    pre.textContent = source;
 
     var figure = document.createElement('figure');
     figure.className = 'diagram';
@@ -43,7 +176,99 @@ layout: default
       fc.textContent = caption;
       figure.appendChild(fc);
     }
+    blocks.push({ pre: pre, source: source });
   });
-  mermaid.initialize({ startOnLoad: true });
+
+  if (blocks.length) {
+    var root = document.documentElement;
+    var nodes = blocks.map(function (b) { return b.pre; });
+
+    function token(name) {
+      return getComputedStyle(root).getPropertyValue(name).trim();
+    }
+
+    // Mermaid's stock palette is fixed light — most visibly a cream #ffffde
+    // subgraph fill that fights a dark page. Driving the 'base' theme from the
+    // site's own custom properties keeps diagrams in whichever theme is showing.
+    // Every value here is a solid colour: mermaid derives further shades from
+    // these, and that maths misbehaves on rgba() inputs.
+    function themeVariables() {
+      var fg = token('--fg'), bg = token('--bg'), muted = token('--muted');
+      return {
+        background: bg,
+        mainBkg: bg,                  // node fill
+        primaryColor: bg,
+        primaryBorderColor: muted,
+        primaryTextColor: fg,
+        secondaryColor: token('--code-bg'),
+        tertiaryColor: token('--code-bg'),
+        nodeBorder: muted,
+        nodeTextColor: fg,
+        clusterBkg: token('--code-bg'),
+        clusterBorder: muted,
+        titleColor: fg,
+        lineColor: muted,
+        edgeLabelBackground: bg,
+        textColor: fg,
+        fontFamily: getComputedStyle(document.body).fontFamily
+      };
+    }
+
+    // Mermaid sizes an SVG to `max-width: <natural width>` with `width: 100%`,
+    // so a diagram wider than the column is scaled down however far it takes to
+    // fit — on a phone that shrinks a dense diagram's labels to a few pixels.
+    // Allow a modest shrink (a diagram slightly too wide shouldn't scroll), and
+    // below that floor pin the width so the figure scrolls instead: it is
+    // overflow-x: auto, and scrolling keeps the labels readable.
+    var MIN_SCALE = 0.8;
+    function fit() {
+      blocks.forEach(function (b) {
+        var svg = b.pre.querySelector('svg');
+        if (!svg) return;
+        var box = svg.viewBox && svg.viewBox.baseVal;
+        if (!box || !box.width) return;
+        svg.style.minWidth = Math.round(box.width * MIN_SCALE) + 'px';
+        // A scrollable region has to be reachable by keyboard, not just by touch.
+        var scrolls = b.pre.scrollWidth > b.pre.clientWidth + 1;
+        if (scrolls) b.pre.setAttribute('tabindex', '0');
+        else b.pre.removeAttribute('tabindex');
+      });
+    }
+
+    var pending = Promise.resolve();
+    function render() {
+      pending = pending.then(function () {
+        mermaid.initialize({
+          startOnLoad: false,
+          // 'loose' lets node labels contain <img> tags (devicon logos); the
+          // default 'strict' level encodes them. All diagram source is authored
+          // in this repo.
+          securityLevel: 'loose',
+          theme: 'base',
+          themeVariables: themeVariables()
+        });
+        blocks.forEach(function (b) {
+          b.pre.removeAttribute('data-processed');
+          b.pre.textContent = b.source;
+        });
+        return mermaid.run({ nodes: nodes }).then(fit);
+      });
+      return pending;
+    }
+
+    render();
+
+    // The header toggle stamps data-theme on <html>; a visitor who has never
+    // toggled follows the OS instead, so watch both.
+    new MutationObserver(render).observe(root, {
+      attributes: true, attributeFilter: ['data-theme']
+    });
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {
+      if (!root.getAttribute('data-theme')) render();
+    });
+
+    // Whether a diagram overflows depends on the column width.
+    window.addEventListener('resize', fit);
+  }
 </script>
 {% endif %}

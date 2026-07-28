@@ -1,1 +1,10 @@
-<input type="checkbox" id="sn-{{ include.id }}" class="sidenote-toggle"><label for="sn-{{ include.id }}" class="sidenote-ref" title="Show note">{{ include.id }}</label><span class="sidenote"><span class="sidenote-num">{{ include.id }}</span> {{ include.text }}</span>
+{%- comment -%}
+  Sidenote. Numbering is automatic: the visible numeral comes from a CSS counter
+  (.sidenote-ref / .sidenote-num in assets/css/style.scss) so notes renumber
+  themselves in document order — callers pass only `text`.
+
+  The checkbox still needs an id to pair with its label; {% increment %} gives a
+  running index that is unique within the page.
+{%- endcomment -%}
+{%- capture sn -%}{%- increment sidenote -%}{%- endcapture -%}
+<input type="checkbox" id="sn-{{ sn }}" class="sidenote-toggle" aria-label="Show note"><label for="sn-{{ sn }}" class="sidenote-ref" title="Show note"></label><span class="sidenote"><span class="sidenote-num"></span> {{ include.text }}</span>

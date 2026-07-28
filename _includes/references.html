@@ -1,0 +1,28 @@
+{%- comment -%}
+  The reference list for a post, numbered to match the {% include cite.html %}
+  markers in the prose. Rendered by _layouts/post.html for any post that declares
+  `references:` in its front matter — see cite.html for the field list.
+
+  Only `title` is required; every other field is dropped if absent, so a source
+  can be a bare title, a linked title, or a full citation.
+{%- endcomment -%}
+{%- if page.references and page.references.size > 0 -%}
+<h2 id="references">References</h2>
+<ol class="references">
+  {%- for r in page.references %}
+  <li id="ref-{{ r.id }}">
+    {%- if r.author %}{{ r.author }}. {% endif -%}
+    <cite>{% if r.url %}<a href="{{ r.url }}">{{ r.title }}</a>{% else %}{{ r.title }}{% endif %}</cite>
+    {%- if r.publisher %}. {{ r.publisher }}{% endif -%}
+    {%- if r.year %}, {{ r.year }}{% endif -%}.
+    {%- if r.note %} {{ r.note }}{% endif %}
+    {%- comment -%}
+      The arrow needs the word beside it: a link whose only content is a symbol
+      has no text for assistive tech (and axe flags it), and the aria-label
+      contains the visible word so the two names agree.
+    {%- endcomment -%}
+    <a class="ref-backlink" href="#cite-{{ r.id }}" aria-label="Back to citation {{ forloop.index }} in the text">&#8617;&#160;Back</a>
+  </li>
+  {%- endfor %}
+</ol>
+{%- endif -%}

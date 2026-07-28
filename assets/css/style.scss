@@ -38,7 +38,16 @@ body {
   background: var(--bg);
 }
 
-a { color: var(--accent); }
+/* Links carry their weight, not a colour: bold in the body colour, blue only on
+   hover. The underline stays so bold text alone is never the only cue. Component
+   rules further down (nav, buttons, social icons) set their own colours and,
+   being later in the file, keep winning over :hover. */
+a {
+  color: var(--fg);
+  font-weight: 600;
+}
+
+a:hover { color: var(--accent); }
 
 /* ---- Navbar ---- */
 .site-header {
@@ -60,9 +69,11 @@ a { color: var(--accent); }
   color: var(--fg);
 }
 
+/* Header chrome opts out of the bold body-link treatment. */
 .site-nav a {
   margin-left: 1.25rem;
   text-decoration: none;
+  font-weight: 400;
   color: var(--muted);
 }
 
@@ -155,8 +166,17 @@ a { color: var(--accent); }
   border-top: 1px solid var(--border);
 }
 
-/* ---- Sidenotes / footnotes ---- */
+/* ---- Sidenotes / footnotes ----
+   Notes are numbered by a counter rather than by hand, so they stay in order
+   however the prose is edited. The reference increments it; the numeral inside
+   the note only reads it, and sits later in the document, so both print the
+   same value. */
+.post {
+  counter-reset: sidenote;
+}
+
 .sidenote-ref {
+  counter-increment: sidenote;
   vertical-align: super;
   font-size: 0.7em;
   font-style: italic;
@@ -164,6 +184,10 @@ a { color: var(--accent); }
   cursor: pointer;
   padding: 0 0.15em;
   user-select: none;
+}
+
+.sidenote-ref::after {
+  content: counter(sidenote, lower-roman);
 }
 
 /* Visually hidden but still focusable, so keyboard/AT users can toggle the note
@@ -183,7 +207,7 @@ a { color: var(--accent); }
   border-radius: 2px;
 }
 
-/* Mobile-first: collapsed, revealed by tapping the reference. */
+/* Collapsed at every width, revealed by clicking the reference. */
 .sidenote {
   display: none;
   margin: 0.75rem 0;
@@ -207,10 +231,15 @@ a { color: var(--accent); }
   margin-right: 0.35rem;
 }
 
-/* Wide screens: float the note into the right margin, always visible. */
+.sidenote-num::before {
+  content: counter(sidenote, lower-roman);
+}
+
+/* Wide screens: once revealed, float the note into the right margin.
+   No display here — that is left to the :checked rule above, so the note stays
+   hidden until the reference is clicked at this width too. */
 @media (min-width: 1280px) {
   .sidenote {
-    display: block;
     float: right;
     clear: right;
     width: 220px;
@@ -715,7 +744,6 @@ a { color: var(--accent); }
   margin: 2rem 0;
 }
 
-/* Tables scroll inside their own container on narrow screens. */
 .post table {
   width: 100%;
   border-collapse: collapse;
@@ -729,19 +757,176 @@ a { color: var(--accent); }
   text-align: left;
 }
 
-.post .diagram {
+/*
+  Wide tables scroll inside their own container instead of squashing their
+  columns (or widening the page). Kramdown emits a bare <table>, so the author
+  opts in per table by wrapping it in <div class="table-scroll" markdown="1">.
+  The min-width sets the point below which it starts scrolling; the container is
+  focusable so the scroll region is reachable by keyboard as well as by touch.
+*/
+.post .table-scroll {
+  overflow-x: auto;
+  margin: 1.25rem 0;
+}
+
+.post .table-scroll table {
+  min-width: 44rem;
+  margin: 0;
+}
+
+.post .table-scroll:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/*
+  Devicon logos (img/icons/) used in the stacks table and inside mermaid node
+  labels. Solid-black logos (e.g. Rust, Fastify, Ansible) opt into an invert on
+  dark backgrounds via the --invert modifier. Diagrams follow the page theme
+  (see the mermaid block in _layouts/post.html), so a logo inside a node needs
+  the modifier on exactly the same terms as one in the prose.
+*/
+.post img.tech-icon { height: 22px; width: auto; vertical-align: middle; }
+
+/*
+  Mermaid stamps label <img>s with inline display:flex + width:100%, which
+  stacks them one per line at full node width; !important is the only way to
+  beat an inline style and keep the logos small and side by side.
+*/
+.post .mermaid img {
+  width: 26px !important;
+  height: 26px !important;
+  display: inline-block !important;
+  vertical-align: middle;
+  margin: 0 2px 4px;
+}
+
+/* The nginx logo is a wide wordmark (viewBox cropped to it), not a square glyph. */
+.post .mermaid img[src$='nginx.svg'] { width: 86px !important; height: 20px !important; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .post img.tech-icon--invert { filter: invert(1); }
+}
+:root[data-theme="dark"] .post img.tech-icon--invert { filter: invert(1); }
+
+/* Covers both image figures and the .diagram figures the mermaid script builds. */
+.post figure {
   margin: 1.5rem 0;
   text-align: center;
 }
 
-.post .diagram figcaption {
+.post figure figcaption {
   margin-top: 0.5rem;
   color: var(--muted);
   font-size: 0.9rem;
   font-style: italic;
 }
 
+/*
+  A diagram wider than the column scrolls here rather than being scaled down to
+  illegibility; post.html pins the SVG's natural width and makes the box
+  focusable when it actually overflows.
+*/
 .post .mermaid { overflow-x: auto; }
+
+.post .mermaid:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Mermaid inlines `background-color` on the SVG, so the page shows through. */
+.post .mermaid svg { background: transparent !important; }
+
+/* ---- Collapsible appendices ----
+   The post script moves each appendix body into a .collapsible region and puts
+   a toggle inside its heading, reusing the collapse mechanics defined above. */
+.appendix-heading { margin-bottom: 0; }
+
+.appendix-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.35rem 0;
+  background: none;
+  border: none;
+  border-radius: 4px;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.appendix-toggle:hover { color: var(--accent); }
+.appendix-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* Points right when closed, down when open. */
+.appendix-chevron {
+  flex: none;
+  color: var(--muted);
+  transition: transform 0.3s ease;
+}
+
+.appendix-toggle:hover .appendix-chevron { color: var(--accent); }
+.appendix-toggle[aria-expanded="true"] .appendix-chevron { transform: rotate(90deg); }
+
+/* Pushed to the far end so the heading text keeps its natural start position. */
+.appendix-hint {
+  margin-left: auto;
+  padding-left: 0.75rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+/* ---- References ----
+   Citations are numbered by the source's position in the post's front matter
+   (see _includes/cite.html), so the marker is plain text; the brackets are
+   decoration and the accessible name comes from the link's aria-label.
+   Bracketed arabic numerals keep them distinct from the roman sidenote refs. */
+.cite-ref {
+  vertical-align: super;
+  font-size: 0.7em;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 0 0.1em;
+}
+
+.cite-ref::before { content: "["; }
+.cite-ref::after { content: "]"; }
+.cite-ref:hover { text-decoration: underline; }
+
+.references {
+  margin: 1rem 0 0;
+  padding-left: 1.5rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.references li {
+  margin-bottom: 0.75rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+/* Highlight the entry a citation link just jumped to. */
+.references li:target { background: var(--accent-soft); }
+
+.references cite { font-style: italic; }
+
+.ref-backlink {
+  margin-left: 0.35rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* Collapsed sections still belong in a printout. */
+@media print {
+  .collapsible.collapsed { grid-template-rows: 1fr; }
+  .collapsible.collapsed .collapsible-inner { visibility: visible; }
+  .appendix-hint, .appendix-chevron { display: none; }
+}
 
 /* ---- Respect a reduced-motion preference ---- */
 @media (prefers-reduced-motion: reduce) {
