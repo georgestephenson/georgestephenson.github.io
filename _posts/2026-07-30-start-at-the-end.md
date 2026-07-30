@@ -208,7 +208,7 @@ I want to briefly mention the distinction between AI models, which are the myste
 
 If you're new to this, I personally recommend Claude Code at the time of writing. The CLI tool is good, so is the VS Code plugin and the Claude Desktop app. However, there are several other competitive tools, like GitHub Copilot and Cursor, and the best tool is likely to change over time. There is a good [Claude Code roadmap](https://roadmap.sh/claude-code) that will guide you through all its features. You don't need to know everything, but understanding what is meant by _context window management_ is a good start. I have completed this roadmap myself and recommend it.
 
-In terms of models, we're at a point where paying more money for a better model will get much better results.{% include sidenote.html text="In the near future, I think open weight models that you run on your own laptop will be more than good enough. We've gone back to the mainframe computer era and we will enter the portable era again soon. In fact you can already do this, but we're not quite at the point where it's the best or most cost-effective option (a good GPU will set you back a bit)." %} You may be aware that coding agents can make mistakes and hallucinate{% include cite.html id="package-hallucination" %}. This has rapidly diminished as models have gotten better. If you've opted for Claude Code, I'd recommend you use it with the Opus or Fable models rather than Sonnet for this reason. A standard Pro subscription will get you a good amount of use out of Opus, but pay for what you can afford.
+In terms of models, we're at a point where paying more money for a better model will get much better results.{% include sidenote.html text="In the near future, I think open weight models that you run on your own laptop will be more than good enough. We've gone back to the mainframe computer era and we will enter the portable era again soon. In fact you can already do this, but we're not quite at the point where it's the best or most cost-effective option (a good GPU will set you back a bit)." %} You may be aware that coding agents can make mistakes and hallucinate{% include cite.html id="package-hallucination" %}. This has rapidly diminished as models have got better. If you've opted for Claude Code, I'd recommend you use it with the Opus or Fable models rather than Sonnet for this reason. A standard Pro subscription will get you a good amount of use out of Opus, but pay for what you can afford.
 
 ## Bootstrapping your full stack project
 
@@ -258,7 +258,7 @@ For bestbooks.guide, here was the exact prompt I used, after creating a new GitH
 > - Terraform
 > - Automated testing throughout with CI gates and excellent coverage
 >
-> I want this to be well architected and follow best practices in July 2026 (research this) but I also want it be simple to begin so we can ship it ASAP, and built with clean architecture so it's easily extensible.
+> I want this to be well architected and follow best practices in July 2026 (research this) but I also want it to be simple to begin so we can ship it ASAP, and built with clean architecture so it's easily extensible.
 
 This was enough to get Claude Code to add a `/docs` folder with a list of design documents categorised by area: `01-product.md`, `02-architecture.md`, `03-data-model.md` etc. For example, here's the proposed repository layout in `02-architecture.md`:
 
@@ -348,7 +348,7 @@ fatal: [bestbooks-prod]: UNREACHABLE! => ubuntu@i-0dc5e6872fb8112d6:
 Permission denied (publickey).
 ```
 
-Twice. In between, monit had been configured beautifully and was not actually running, which took [its own commit](https://github.com/georgestephenson/best-books-guide/commit/628ece1) to notice. These are all the bits that aren't code, and the bits Claude struggles with most.
+Twice. In between, Monit had been configured beautifully and was not actually running, which took [its own commit](https://github.com/georgestephenson/best-books-guide/commit/628ece1) to notice. These are all the bits that aren't code, and the bits Claude struggles with most.
 
 **A placeholder reached production.** The M2 deploy ran the database migration against a hostname that was, literally, the word `base`:
 
@@ -434,7 +434,7 @@ Hopefully this approach is both more fun and more informative.
 
 **If AI built all of it, then I don't understand any of it**
 
-The key thing here is that we started at the end, by building a working system. But it wasn't the end at all, it became the subtrate for [didactic prompting](#didactic-prompting). Rather than follow dry study material, you entirely built the thing that most excites you, which is now yours to do whatever you want with. What you've built is an incredibly rich artifact that you can study, learn from, and make your own: see [Learning patterns](#learning-patterns) and [Roadmaps](#roadmaps).
+The key thing here is that we started at the end, by building a working system. But it wasn't the end at all, it became the substrate for [didactic prompting](#didactic-prompting). Rather than follow dry study material, you entirely built the thing that most excites you, which is now yours to do whatever you want with. What you've built is an incredibly rich artefact that you can study, learn from, and make your own: see [Learning patterns](#learning-patterns) and [Roadmaps](#roadmaps).
 
 **This is not the AI I had in mind. I want to build AI systems, not just use AI tools to build websites**
 
@@ -455,11 +455,11 @@ This _is_ being a real developer in 2026. The truth is that scaffolding code isn
 - Scalability{% include cite.html id="ddia" %}
 - Maintainability{% include cite.html id="ddia" %}
 
-This becomes part of your project creation process, and the more complex the project, the more thought you put into it. Once your project skeleton is in place, that's when you can practice coding the parts that really matter.
+This becomes part of your project creation process, and the more complex the project, the more thought you put into it. Once your project skeleton is in place, that's when you can practise coding the parts that really matter.
 
 **I can't just bootstrap a large Kubernetes cluster that easily**
 
-Distributed systems are an area of intense focus in modern software engineering, and also an area of intense complexity. You may want to start with a technology used in distributed systems, such as Kubernetes or Kafka, and deliberately use it for the wrong use case - a monolithic system, single instance, straight to production, etc. Once the skeleton is in place then you can practice how it scales into a distributed system, which becomes your exercise. Again we're bootstrapping the tech stack to get to the good part.
+Distributed systems are an area of intense focus in modern software engineering, and also an area of intense complexity. You may want to start with a technology used in distributed systems, such as Kubernetes or Kafka, and deliberately use it for the wrong use case - a monolithic system, single instance, straight to production, etc. Once the skeleton is in place then you can practise how it scales into a distributed system, which becomes your exercise. Again we're bootstrapping the tech stack to get to the good part.
 
 ## Summary
 
