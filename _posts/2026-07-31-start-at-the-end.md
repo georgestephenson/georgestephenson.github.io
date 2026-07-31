@@ -2,7 +2,7 @@
 layout: post
 title: "Start at the end: learning full stack development with AI"
 description: "Build the whole project with an AI coding agent first, then learn full stack development by taking it apart - the stack, the prompts and the tutoring technique."
-date: 2026-07-30
+date: 2026-07-31
 category: software
 tags: [software, full stack development, spec-driven development, didactic prompting]
 image:
